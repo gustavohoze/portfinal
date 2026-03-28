@@ -6,6 +6,7 @@ import CustomCursor from "@/components/ui/CustomCursor";
 import PageTransition from "@/components/ui/PageTransition";
 import GlobalCanvasWrapper from "@/components/ui/GlobalCanvasWrapper";
 import "./globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 // ─── Metadata ────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
