@@ -1,0 +1,55 @@
+.ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  margin-top: -16px;
+  margin-left: -16px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  transition: width 0.3s var(--ease-out-expo),
+              height 0.3s var(--ease-out-expo),
+              margin 0.3s var(--ease-out-expo),
+              border-width 0.3s ease,
+              background-color 0.3s ease;
+  will-change: transform;
+}
+
+.ring.hovered {
+  width: 64px;
+  height: 64px;
+  margin-top: -32px;
+  margin-left: -32px;
+  border-width: 0;
+  background-color: #ffffff;
+  mix-blend-mode: difference;
+}
+
+.core {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  margin-left: -3px;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  transition: opacity 0.3s ease;
+  will-change: transform;
+}
+
+.coreHidden {
+  opacity: 0;
+}
+
+@media (pointer: coarse), (max-width: 768px) {
+  .ring, .core {
+    display: none !important;
+  }
+}

@@ -1,0 +1,123 @@
+.card {
+  display: block;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  transition: border-color var(--duration-slow) ease;
+  background: var(--color-bg-elevated);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.card:hover {
+  border-color: var(--color-border-hover);
+  background: rgba(45, 45, 55, 0.35); /* Brighten the glass slightly on hover */
+}
+
+.releaseCard {
+  border-color: rgba(255, 184, 74, 0.75);
+  box-shadow: 0 0 0 1px rgba(255, 184, 74, 0.35), 0 12px 36px rgba(255, 160, 40, 0.25);
+}
+
+.releaseCard:hover {
+  border-color: rgba(255, 205, 99, 0.95);
+  box-shadow: 0 0 0 1px rgba(255, 205, 99, 0.45), 0 16px 40px rgba(255, 170, 55, 0.32);
+}
+
+/* Thumbnail */
+.thumbnail {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.image {
+  object-fit: cover;
+  transition: transform var(--duration-xslow) var(--ease-out-expo);
+}
+
+.card:hover .image {
+  transform: scale(1.04);
+}
+
+.placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--color-surface) 0%, rgba(255,255,255,0.02) 100%);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity var(--duration-slow) ease;
+}
+
+.card:hover .overlay {
+  opacity: 1;
+}
+
+/* Info */
+.info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex: 0 0 auto;
+}
+
+.index {
+  font-family: var(--font-suisse);
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+.badge {
+  font-size: 9px;
+}
+
+.releaseBadge {
+  font-size: 8px;
+  color: #2b1c00;
+  background: linear-gradient(135deg, #ffd36a 0%, #ffb347 55%, #ff9e2c 100%);
+  border: 1px solid rgba(255, 215, 124, 0.95);
+  box-shadow: 0 4px 10px rgba(255, 166, 0, 0.35);
+}
+
+.title {
+  flex: 1;
+  font-family: var(--font-sf-display);
+  font-size: var(--text-lg);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+  text-shadow: 0 4px 12px rgba(0,0,0,0.9);
+}
+
+.arrow {
+  font-size: var(--text-base);
+  color: var(--color-text-tertiary);
+  transition: transform var(--duration-base) ease, color var(--duration-base) ease;
+  flex: 0 0 auto;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+.card:hover .arrow {
+  transform: translateX(4px);
+  color: var(--color-text-primary);
+}

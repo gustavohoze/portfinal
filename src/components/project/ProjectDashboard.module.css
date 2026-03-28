@@ -1,0 +1,237 @@
+.page {
+  padding-top: 140px;
+  padding-bottom: var(--space-24);
+  min-height: 100svh;
+}
+
+.header {
+  margin-bottom: var(--space-10);
+  animation: fadeUp 0.8s var(--ease-out-expo) both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.headline {
+  font-family: var(--font-sf-display);
+  font-size: clamp(3rem, 5vw + 1rem, var(--text-5xl));
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.sub {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+/* ─── Sticky Toolbar ─────────────────────────────────────────────────────── */
+.toolbarWrapper {
+  position: sticky;
+  top: 76px; /* Just below the fixed Header.tsx -> 80px */
+  z-index: 50;
+  margin-bottom: var(--space-12);
+  padding-block: var(--space-4);
+  /* Pure transparent container; relies entirely on the segmented glass blocks inside */
+  animation: fadeUp 0.8s var(--ease-out-expo) 0.1s both;
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .toolbar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.searchBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 320px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 16px;
+  color: var(--color-text-primary);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.searchInput {
+  width: 100%;
+  height: 44px;
+  padding-left: 44px;
+  padding-right: 16px;
+  background: rgba(255, 255, 255, 0.08); /* Brighter glass to stand out */
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  color: var(--color-text-primary);
+  font-family: var(--font-suisse);
+  font-size: var(--text-base);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: border-color var(--duration-base) ease, background var(--duration-base) ease;
+}
+
+.searchInput::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.4);
+  background: var(--color-surface);
+}
+
+.segment {
+  display: flex;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--radius-full);
+  padding: 4px;
+  align-self: flex-start;
+}
+
+.segmentBtn {
+  position: relative;
+  padding: 8px 24px;
+  border-radius: var(--radius-full);
+  color: var(--color-text-secondary);
+  font-family: var(--font-suisse);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+  transition: color 0.15s ease;
+  z-index: 1;
+  cursor: none; /* Let the custom cursor handle it */
+}
+
+.segmentBtn:hover {
+  color: var(--color-text-primary);
+}
+
+.segmentBtn.active {
+  color: #000000;
+}
+
+.segmentText {
+  position: relative;
+  z-index: 2;
+}
+
+.segmentBg {
+  position: absolute;
+  inset: 0;
+  background: var(--color-text-primary);
+  border-radius: inherit;
+  z-index: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  /* The layout animation for sliding happens naturally if React shifts the component, but we'll use a clean pop for now */
+  animation: popIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.95); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ─── Grid ───────────────────────────────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-12) var(--space-6);
+  }
+}
+
+.empty {
+  font-family: var(--font-suisse);
+  color: var(--color-text-tertiary);
+  padding-block: var(--space-20);
+  text-align: center;
+}
+
+/* ─── Pagination ─────────────────────────────────────────────────────────── */
+.pagination {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-16);
+}
+
+.pageNumbers {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.pageBtn,
+.pageNum {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  font-family: var(--font-suisse);
+  font-size: var(--text-sm);
+  border-radius: var(--radius-full);
+  transition: all var(--duration-base) ease;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+}
+
+.pageBtn {
+  padding: 8px 16px;
+  font-weight: 500;
+}
+
+.pageNum {
+  width: 36px;
+  height: 36px;
+}
+
+.pageBtn:hover:not(:disabled),
+.pageNum:hover:not(.activePage) {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: var(--color-text-primary);
+  background: var(--color-surface);
+}
+
+.pageBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.activePage {
+  background: var(--color-text-primary);
+  color: #000;
+  border-color: var(--color-text-primary);
+  pointer-events: none;
+}
+

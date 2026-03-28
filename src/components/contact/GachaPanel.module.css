@@ -1,0 +1,230 @@
+/* GachaPanel.module.css */
+
+.fab {
+  position: fixed;
+  bottom: var(--space-8);
+  right: var(--space-8);
+  z-index: var(--z-overlay);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(18, 18, 22, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: auto;
+}
+
+.fabHidden {
+  transform: scale(0) !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fabIcon {
+  font-size: 32px;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.fab:hover:not(.fabHidden) {
+  transform: scale(1.1) translateY(-4px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.fab:hover:not(.fabHidden) .fabIcon {
+  transform: rotate(15deg) scale(1.1);
+}
+
+/* --- OVERLAY --- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(5, 5, 8, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.fortuneContainer {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* CSS Fortune Ball */
+.fortuneBall {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.ballCore {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.7) 70%);
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 
+    inset 10px 20px 30px rgba(255,255,255,0.1),
+    inset -20px -20px 40px rgba(0,0,0,0.9),
+    0 30px 60px rgba(0,0,0,0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  overflow: hidden;
+  transition: all 0.4s var(--ease-out-expo);
+}
+
+.ballInnerEnergy {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 221, 255, 0.8) 0%, rgba(77, 227, 124, 0) 70%);
+  filter: blur(25px);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.ballRolling .ballInnerEnergy {
+  opacity: 1;
+  animation: energyPulse 0.4s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+}
+
+@keyframes energyPulse {
+  0% { transform: translate(-50%, -50%) scale(0.6); opacity: 0.5; filter: blur(20px) hue-rotate(0deg); }
+  100% { transform: translate(-50%, -50%) scale(1.4); opacity: 1; filter: blur(25px) hue-rotate(30deg); }
+}
+
+.ballGlow {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 400px; height: 400px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(0, 221, 255, 0.2) 0%, transparent 60%);
+  opacity: 0;
+}
+
+.ballRolling .ballGlow {
+  opacity: 1;
+  animation: outerPulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes outerPulse {
+  0% { transform: translate(-50%, -50%) scale(0.8); }
+  100% { transform: translate(-50%, -50%) scale(1.2); }
+}
+
+.ballResult .ballCore {
+  opacity: 0;
+  transform: scale(0.6);
+}
+
+.ballResult .ballGlow {
+  background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 204, 0, 0.6) 30%, transparent 70%);
+  opacity: 1;
+  animation: explosiveFlash 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes explosiveFlash {
+  0% { transform: translate(-50%, -50%) scale(0.3); opacity: 1; filter: blur(0px) brightness(2); }
+  20% { transform: translate(-50%, -50%) scale(2); opacity: 1; filter: blur(10px) brightness(3); }
+  100% { transform: translate(-50%, -50%) scale(3.5); opacity: 0; filter: blur(30px) brightness(1); }
+}
+
+/* Mini Canvas rendering the Shifting Silhouettes */
+.canvasWrapper {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  z-index: 20;
+}
+
+.uiOverlay {
+  position: absolute;
+  bottom: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  text-align: center;
+  color: white;
+  width: 100%;
+}
+
+.rollingText {
+  font-family: var(--font-sf-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+  animation: flicker 0.1s infinite alternate;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.6; filter: blur(2px); }
+  100% { opacity: 1; filter: blur(0); }
+}
+
+.resultUI {
+  animation: slideUpResult 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.resultTitle {
+  font-family: var(--font-sf-display);
+  font-size: 4rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: linear-gradient(to bottom, #ffffff, #aaaaaa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: var(--space-3);
+  text-shadow: 0 10px 30px rgba(255,255,255,0.3);
+}
+
+.resultDesc {
+  font-family: var(--font-suisse);
+  font-size: 1.2rem;
+  color: rgba(255,255,255,0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+@keyframes slideUpResult {
+  0% { transform: translateY(40px) scale(0.9); opacity: 0; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}

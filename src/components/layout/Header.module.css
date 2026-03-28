@@ -1,0 +1,197 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  padding: var(--space-6) var(--page-gutter);
+  transition: transform var(--duration-slow) var(--ease-out-expo),
+              background-color var(--duration-base) ease;
+  animation: fadeDownHeader 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) 0.2s backwards;
+}
+
+@keyframes fadeDownHeader {
+  0% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%);
+  backdrop-filter: blur(0px);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--duration-slow) ease;
+}
+
+.header.scrolled::before {
+  opacity: 1;
+  background: rgba(10, 10, 12, 0.6);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Sleek glass edge */
+}
+
+.hidden {
+  transform: translateY(-110%) !important;
+  animation: none !important;
+  pointer-events: none;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%; /* Fixes the collapse when CTA is removed */
+  max-width: var(--max-width);
+  margin-inline: auto;
+  position: relative;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  color: var(--color-text-primary);
+  transition: opacity var(--duration-base) ease;
+}
+
+.logo:hover {
+  opacity: 0.6;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.link {
+  font-size: var(--text-sm);
+  font-family: var(--font-suisse);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--color-text-secondary);
+  transition: color var(--duration-base) ease;
+  position: relative;
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-text-primary);
+  transition: width var(--duration-slow) var(--ease-out-expo);
+}
+
+.link:hover,
+.link.active {
+  color: var(--color-text-primary);
+}
+
+.link:hover::after,
+.link.active::after {
+  width: 100%;
+}
+
+/* ─── Mobile Menu ────────────────────────────────────────────────────────── */
+.mobileToggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  z-index: calc(var(--z-nav) + 2);
+  pointer-events: auto;
+}
+
+.hamburger {
+  width: 20px;
+  height: 12px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hamburger span {
+  display: block;
+  height: 1.5px;
+  width: 100%;
+  background: var(--color-text-primary);
+  border-radius: 1px;
+  transition: transform 0.3s var(--ease-spring), opacity 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburgerOpen span:nth-child(1) {
+  transform: translateY(5px) rotate(45deg);
+}
+
+.hamburgerOpen span:nth-child(2) {
+  transform: translateY(-5.5px) rotate(-45deg);
+}
+
+.mobileMenu {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 12, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: calc(var(--z-nav) + 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease-out-expo);
+}
+
+.mobileMenuOpen {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+  transform: translateY(20px);
+  transition: transform 0.4s var(--ease-out-expo);
+}
+
+.mobileMenuOpen .mobileNav {
+  transform: translateY(0);
+}
+
+.mobileLink {
+  font-family: var(--font-sf-display);
+  font-size: var(--text-3xl);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  letter-spacing: -0.02em;
+  transition: color var(--duration-base) ease;
+}
+
+.mobileLink.active,
+.mobileLink:hover {
+  color: var(--color-text-primary);
+}
+
+@media (max-width: 640px) {
+  .nav {
+    display: none;
+  }
+  .mobileToggle {
+    display: flex;
+  }
+}

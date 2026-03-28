@@ -1,0 +1,26 @@
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  color: var(--color-text-tertiary);
+  overflow: hidden;
+  /* Allow inherited border-radius from parent via overflow or explicit classes */
+}
+
+.icon {
+  font-size: 1.5rem;
+  opacity: 0.4;
+}
+
+.text {
+  font-family: var(--font-suisse);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+  padding-inline: var(--space-4);
+}

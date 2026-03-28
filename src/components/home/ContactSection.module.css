@@ -1,0 +1,96 @@
+.section {
+  padding-block: var(--space-48);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-8);
+  
+  /* Massive Liquid Glass Panel */
+  background: var(--color-bg-elevated);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-20) var(--space-10);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.label {
+  font-family: var(--font-suisse);
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+}
+
+.emailLink {
+  font-family: var(--font-sf-display);
+  font-size: clamp(1.75rem, 1rem + 4vw, 4rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--color-text-primary);
+  line-height: 1.1;
+  transition: opacity var(--duration-base) ease;
+  position: relative;
+  display: inline-block;
+  text-shadow: 0 8px 24px rgba(0,0,0,0.8);
+}
+
+.emailLink::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--color-text-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--duration-slow) var(--ease-out-expo);
+}
+
+.emailLink:hover::after {
+  transform: scaleX(1);
+}
+
+.emailLink:hover {
+  opacity: 0.8;
+}
+
+.sub {
+  font-size: var(--text-lg);
+  color: var(--color-text-tertiary);
+  line-height: 1.7;
+  letter-spacing: -0.01em;
+}
+
+.social {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.socialLink {
+  font-family: var(--font-suisse);
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
+  transition: color var(--duration-base) ease;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+}
+
+.socialLink:hover {
+  color: var(--color-text-primary);
+}
+
+.dot {
+  color: var(--color-text-tertiary);
+  font-size: var(--text-sm);
+  display: inline-block;
+  opacity: 0.5;
+}
